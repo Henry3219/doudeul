@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doudeul - Home</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header>
+    <h1>Welcome to Doudeul</h1>
+    <nav>
+        <ul>
+            <li><a href="show_votes.html">Home</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="create_poll.html">Create Poll</a></li>
+        </ul>
+    </nav>
+</header>
+    <main>
+         <section id="intro">
+                <h2>Welcome to Doudeul</h2>
+                <p>Doudeul helps you easily schedule meetings, appointments, or events by allowing users to quickly create and manage polls with potential time slots.</p>
+            </section>
+                <section id="features">
+                <h2>Core Features</h2>
+                <ul>
+                    <li>Create Polls with potential time slots</li>
+                    <li>Email notifications for poll results</li>
+                    <li>Secure and private access for invited users</li>
+                    <li>Manage and delete polls</li>
+                </ul>
+            </section>
+                <section id="user-workflow">
+                <h2>User Workflow</h2>
+                <ol>
+                    <li>Register and Login</li>
+                    <li>Create Polls</li>
+                    <li>Select Time Slots</li>
+                    <li>Generate Unique Access Links</li>
+                    <li>Manage Polls and View Results</li>
+                    <li>Delete Polls</li>
+                </ol>
+            </section>
+        <h2>All Polls</h2>
+        <div id="pollsList"></div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script>
+        if (window.location.pathname.endsWith('index_back.html')) {
+        const pollsList = document.getElementById('pollsList');
+        getData('polls.json').then(polls => {
+            if (polls) {
+                polls.forEach(poll => {
+                    const pollItem = document.createElement('div');
+                    let pollInfo = `
+                        <h3>${poll.title}</h3>
+                        <p>${poll.description}</p >
+                        <button onclick="vote('${poll.title}')">Vote</button>
+                        ${poll.creator === JSON.parse(sessionStorage.getItem('loggedInUser')).email ? `<button onclick="deletePoll('${poll.title}')">Delete</button>` : ''}
+                    `;
+
+                    if (poll.type === 'public' || poll.type === 'private') {
+                        pollInfo += '<p>Recent Votes: </p >';
+                        const recentVotes = poll.votes.slice(-3).map(vote => vote.email).join(', ');
+                        pollInfo += `<p>${recentVotes}</p >`;
+                    }
+
+                    pollInfo += `<p>Total Votes: ${poll.votes.length}</p >`;
+
+                    pollItem.innerHTML = pollInfo;
+                    pollsList.appendChild(pollItem);
+                });
+            }
+        });
+    }
+    </script>
+    <footer>
+        <p>&copy; 2024 Doudeul. All rights reserved.</p>
+    </footer>
+</body>
+</html>

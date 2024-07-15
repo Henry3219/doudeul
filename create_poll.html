@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doudeul - Create Poll</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header>
+    <h1>Create Poll</h1>
+</header>
+<main>
+    <form id="createPollForm">
+        <label for="poll_title">Poll Title:</label>
+        <input type="text" id="poll_title" name="poll_title" required>
+
+        <label for="poll_type">Poll Type:</label>
+        <select id="poll_type" name="poll_type" required>
+            <option value="public">Public</option>
+            <option value="private">Private</option>
+            <option value="anonymous">Anonymous</option>
+        </select>
+
+        <label for="poll_deadline">Poll Deadline:</label>
+        <input type="date" id="poll_deadline" name="poll_deadline">
+
+        <label for="poll_description">Poll Description:</label>
+        <textarea id="poll_description" name="poll_description" required></textarea>
+
+        <label for="participants">Participants (comma-separated emails):</label>
+        <input type="text" id="participants" name="participants">
+
+        <label for="options">Options (comma-separated):</label>
+        <input type="text" id="options" name="options" required>
+
+        <button type="submit">Create</button>
+    </form>
+</main>
+<footer>
+    <p>&copy; 2024 Doudeul. All rights reserved.</p>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

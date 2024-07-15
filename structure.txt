@@ -1,0 +1,17 @@
+/doudeul
+    /css
+        styles.css
+    /js
+        main.js
+    /data
+        users.sql
+        users.json
+        polls.sql
+        polls.json
+    index.html
+    register.html
+    login.html
+    create_poll.html
+    register_process.php
+    login_process.php
+    create_poll_process.php
